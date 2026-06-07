@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lean 4 Proof Corpus — velvetmonkey</title>
+<meta name="description" content="A machine-checked Lean 4 proof corpus spanning optimisation, dynamical systems, and learning theory. Most repositories zero-sorry.">
+<style>
+  :root { --bg:#0d0d12; --panel:#15151d; --ink:#e8e8ef; --dim:#9aa0ad; --line:#26263340; --accent:#a855f7; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:920px; margin:0 auto; padding:64px 22px 96px; }
+  header h1 { font-size:2rem; margin:0 0 6px; letter-spacing:-.02em; }
+  .tag { color:var(--accent); font-weight:600; }
+  .lede { color:var(--dim); max-width:60ch; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .meta { color:var(--dim); font-size:.9rem; margin-top:10px; }
+  .featured { display:block; margin:28px 0 8px; padding:16px 18px; background:var(--panel);
+    border:1px solid var(--line); border-radius:12px; }
+  .featured b { color:var(--ink); }
+  h2 { font-size:1.05rem; margin:40px 0 12px; padding-bottom:6px; border-bottom:1px solid var(--line);
+    text-transform:uppercase; letter-spacing:.06em; color:var(--dim); }
+  ul { list-style:none; margin:0; padding:0; }
+  li { padding:9px 0; border-bottom:1px solid var(--line); }
+  li .name { font-weight:600; }
+  li .desc { color:var(--dim); }
+  footer { margin-top:56px; color:var(--dim); font-size:.9rem; }
+  code { background:#ffffff10; padding:1px 5px; border-radius:4px; font-size:.85em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Lean 4 Proof Corpus</h1>
+    <p class="lede">A machine-checked library of mathematics across the spine of modern AI:
+      <span class="tag">optimisation</span>, <span class="tag">dynamical systems</span>,
+      <span class="tag">learning theory</span>. Each repository states its axioms and any
+      documented gaps. Most are zero-<code>sorry</code>.</p>
+    <p class="meta">by <a href="https://github.com/velvetmonkey">velvetmonkey</a> ·
+      <a href="https://orcid.org/0009-0004-1899-7627">ORCID</a> ·
+      Claims need receipts.</p>
+  </header>
+
+  <a class="featured" href="https://velvetmonkey.github.io/flywheel-universe/">
+    ★ Featured demo &nbsp;·&nbsp; <b>Hebbian Kuramoto — Basin Boundary</b>
+    &nbsp;<span style="color:var(--dim)">interactive showcase →</span></a>
+
+  <h2>Convex optimisation &amp; gradient methods</h2>
+  <ul>
+    <li><a class="name" href="https://github.com/velvetmonkey/gradient-descent-lean">gradient-descent-lean</a> — <span class="desc">GD convergence for smooth convex optimisation. 17 theorems, zero sorry.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/nesterov-lean">nesterov-lean</a> — <span class="desc">Nesterov accelerated gradient descent.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/heavy-ball-lean">heavy-ball-lean</a> — <span class="desc">Polyak heavy-ball convergence.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/proximal-gd-lean">proximal-gd-lean</a> — <span class="desc">Proximal gradient descent for composite objectives.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/projected-gd-lean">projected-gd-lean</a> — <span class="desc">Projected gradient descent convergence.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/subgradient-lean">subgradient-lean</a> — <span class="desc">Subgradient method for nonsmooth convex objectives.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/mirror-descent-lean">mirror-descent-lean</a> — <span class="desc">Mirror descent with Bregman divergence.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/frank-wolfe-lean">frank-wolfe-lean</a> — <span class="desc">Frank-Wolfe (conditional gradient).</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/coordinate-descent-lean">coordinate-descent-lean</a> — <span class="desc">Cyclic coordinate descent convergence.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/admm-lean">admm-lean</a> — <span class="desc">ADMM convergence, primal/dual residuals.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/newton-lean">newton-lean</a> — <span class="desc">Newton's method quadratic convergence.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/sgd-lean">sgd-lean</a> — <span class="desc">Stochastic gradient descent convergence.</span></li>
+  </ul>
+
+  <h2>Learning theory &amp; online learning</h2>
+  <ul>
+    <li><a class="name" href="https://github.com/velvetmonkey/pac-learning-lean">pac-learning-lean</a> — <span class="desc">PAC learning bounds, Hoeffding inequality.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/online-learning-lean">online-learning-lean</a> — <span class="desc">FTRL regret bounds for online convex optimisation.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/replicator-lean">replicator-lean</a> — <span class="desc">Replicator dynamics on the standard simplex.</span></li>
+  </ul>
+
+  <h2>Dynamical systems &amp; stability</h2>
+  <ul>
+    <li><a class="name" href="https://github.com/velvetmonkey/kuramoto-lean">kuramoto-lean</a> — <span class="desc">Finite-N Kuramoto synchronisation.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/lyapunov-odes-lean">lyapunov-odes-lean</a> — <span class="desc">Lyapunov stability for autonomous ODEs.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/lasalle-lean">lasalle-lean</a> — <span class="desc">LaSalle's invariance principle.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/barbalat-lean">barbalat-lean</a> — <span class="desc">Barbalat's lemma and the Lyapunov-Barbalat route.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/contraction-lean">contraction-lean</a> — <span class="desc">Contraction theory, Banach fixed point.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/lotka-volterra-lean">lotka-volterra-lean</a> — <span class="desc">Lotka-Volterra predator-prey dynamics.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/langevin-lean">langevin-lean</a> — <span class="desc">Bounded-noise Langevin dynamics.</span></li>
+  </ul>
+
+  <h2>Neural &amp; associative memory</h2>
+  <ul>
+    <li><a class="name" href="https://github.com/velvetmonkey/hopfield-lean">hopfield-lean</a> — <span class="desc">Hopfield network energy descent.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/modern-hopfield-lean">modern-hopfield-lean</a> — <span class="desc">Modern Hopfield network energy descent.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/attention-lean">attention-lean</a> — <span class="desc">Hard-attention expressivity (Mathlib).</span></li>
+  </ul>
+
+  <h2>Linear algebra &amp; logic</h2>
+  <ul>
+    <li><a class="name" href="https://github.com/velvetmonkey/schur-complement-lean">schur-complement-lean</a> — <span class="desc">Schur complement nonsingular-inverse API and block matrices.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/trace-logic-lean">trace-logic-lean</a> — <span class="desc">Hoffman trace logic formalisation.</span></li>
+  </ul>
+
+  <h2>Physics</h2>
+  <ul>
+    <li><a class="name" href="https://github.com/velvetmonkey/hamiltonian-lean">hamiltonian-lean</a> — <span class="desc">Hamiltonian mechanics and Liouville's theorem.</span></li>
+    <li><a class="name" href="https://github.com/velvetmonkey/observer-patch-holography">observer-patch-holography</a> — <span class="desc">OPH: finite observer-patch reconstruction (active research).</span></li>
+  </ul>
+
+  <footer>
+    Built in the open. When a repo says zero <code>sorry</code>, it means zero <code>sorry</code>.<br>
+    <a href="https://github.com/velvetmonkey">github.com/velvetmonkey</a>
+  </footer>
+</div>
+</body>
+</html>

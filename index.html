@@ -17,6 +17,8 @@
   a { color:var(--accent); text-decoration:none; }
   a:hover { text-decoration:underline; }
   .meta { color:var(--dim); font-size:.9rem; margin-top:10px; }
+  .context { margin:26px 0 8px; padding:18px 0 2px; color:var(--dim); max-width:72ch; }
+  .context p { margin:0 0 12px; }
   .featured { display:block; margin:28px 0 8px; padding:16px 18px; background:var(--panel);
     border:1px solid var(--line); border-radius:12px; }
   .featured b { color:var(--ink); }
@@ -42,6 +44,21 @@
       <a href="https://orcid.org/0009-0004-1899-7627">ORCID</a> ·
       Claims need receipts.</p>
   </header>
+
+  <section class="context" aria-label="Research context">
+    <p>This page is a research index: a growing Lean 4 proof corpus for small,
+      checkable pieces of mathematics around optimisation, dynamics, learning
+      theory, distributed systems, attention, and adjacent formal methods. The
+      goal is not to make every repository grand; it is to make each claim
+      inspectable, with theorem statements, axiom footprints, and any remaining
+      gaps visible in the source.</p>
+    <p>The corpus is also a working method. Start with a concrete theorem, keep
+      the model narrow enough to audit, drive the proof to zero <code>sorry</code>
+      where possible, and publish enough context that another researcher can
+      see what was proved, what was assumed, and what was left out. Some entries
+      are mature proof bricks; others are active research notes. The index below
+      keeps both kinds in one place.</p>
+  </section>
 
   <a class="featured" href="https://velvetmonkey.github.io/flywheel-universe/">
     ★ Featured demo &nbsp;·&nbsp; <b>Hebbian Kuramoto — Basin Boundary</b>

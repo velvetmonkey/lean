@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lean 4 Proof Corpus — velvetmonkey</title>
-<meta name="description" content="A machine-checked Lean 4 proof corpus spanning optimisation, dynamical systems, and learning theory. Most repositories zero-sorry.">
+<meta name="description" content="Small, machine-checked abstractions for AI reliability claims. The definition is the work: name the abstraction, prove the boundary, state the non-claims. Most repositories zero-sorry.">
 <style>
   :root { --bg:#0d0d12; --panel:#15151d; --ink:#e8e8ef; --dim:#9aa0ad; --line:#26263340; --accent:#a855f7; }
   * { box-sizing:border-box; }
@@ -40,10 +40,11 @@
 <div class="wrap">
   <header>
     <h1>Lean 4 Proof Corpus</h1>
-    <p class="lede">A machine-checked library of the mathematics AI reliability rests on:
+    <p class="lede">Small, machine-checked <b>abstractions for AI reliability claims</b>:
       <span class="tag">optimisation</span>, <span class="tag">dynamical systems</span>,
-      <span class="tag">learning theory</span>, <span class="tag">consensus</span>. Each
-      repository states its axioms and any documented gaps. Most are zero-<code>sorry</code>.</p>
+      <span class="tag">consensus</span>, <span class="tag">safety</span>. Each repository names
+      the abstraction, proves the boundary, and states its axioms and non-claims. Most are
+      zero-<code>sorry</code>.</p>
     <p class="meta">by <a href="https://github.com/velvetmonkey">velvetmonkey</a> ·
       <a href="https://orcid.org/0009-0004-1899-7627">ORCID</a> ·
       Claims need receipts.</p>
@@ -64,11 +65,12 @@
       what was assumed, and what was left out. Some entries are mature proof bricks; others are
       active research notes. Where these convex and classical results bound the non-convex
       systems used in practice, that boundary is stated, not blurred.</p>
-    <p><b>The differentiator:</b> this is not a stack of isolated textbook lemmas. It is a habit,
-      taking mathematically load-bearing claims about optimisation, dynamics, consensus, and
-      safety, narrowing them to honest theorem statements, machine-checking them in Lean,
-      exposing the axiom footprint, and wiring them back to working systems. Turning system
-      claims into checkable theorem boundaries.</p>
+    <p><b>The definition is the work.</b> The proof is often just the receipt; the invention is
+      finding the smaller shape a messy claim really has, and naming it. The method is one seam:
+      a messy AI or systems claim, narrowed to the smallest faithful model, given a named
+      abstraction, driven to a theorem boundary, with its non-claims stated, and connected back
+      to a usable software or research story. Not a stack of isolated textbook lemmas.
+      Architecture at the theorem boundary.</p>
   </section>
 
   <a class="featured" href="https://velvetmonkey.github.io/flywheel-universe/">

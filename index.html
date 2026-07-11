@@ -86,6 +86,29 @@
     </ul>
   </section>
 
+  <section class="context" aria-label="Seal authorization mesh">
+    <style>
+      .brick-table{width:100%;border-collapse:collapse;margin:0.6rem 0;font-size:0.92em}
+      .brick-table th,.brick-table td{border:1px solid var(--dim,#444);padding:0.4rem 0.6rem;text-align:left;vertical-align:top}
+      .brick-table th{font-weight:600}
+      .brick-table code{white-space:nowrap}
+    </style>
+    <p><b>The agent-security brick, in detail: the seal authorization mesh.</b> A machine-checked authorization boundary for AI agents, plus a proof that a fleet of these gates keeps a one-shot approval single-use across a network partition. Every result is kernel-checked to the axiom footprint <code>{propext, Classical.choice, Quot.sound}</code>, no <code>sorry</code>, no <code>native_decide</code>.</p>
+    <table class="brick-table">
+      <thead><tr><th>Brick</th><th>What it proves</th><th>Theorem</th><th>Repo</th></tr></thead>
+      <tbody>
+        <tr><td>Non-bypass / default-deny</td><td>No guarded tool call reaches execution without a matching live approval; absent one, the answer is no.</td><td><code>non_bypass</code>, <code>default_deny</code></td><td>mcp-seal</td></tr>
+        <tr><td>Receipt non-interference (single request)</td><td>The audit record reveals nothing about protected policy or other tenants beyond the one authorized bit.</td><td><code>observe_noninterference</code></td><td>seal-host</td></tr>
+        <tr><td>Receipt non-interference (cross-session)</td><td>The guarantee holds across a whole request trace; the record is not a covert channel over time.</td><td><code>stateful_noninterference_trace</code></td><td>seal-host</td></tr>
+        <tr><td>Tamper-evident record chain</td><td>The audit chain cannot be altered undetectably, under an injective hash step.</td><td><code>Host.Record.tamper_evident</code></td><td>seal-host</td></tr>
+        <tr><td>Authority-frontier necessity</td><td>Over freely-replicable state, staying single-use forces at most one live consumer at any consistent cut; drop coordination and a double-spend is witnessed.</td><td><code>authority_frontier_card_le_one</code></td><td>crdt-lean</td></tr>
+        <tr><td>Sealed-handoff sufficiency</td><td>Sealing a sender's own consume before the next node is enabled keeps the fleet safe (proven in the finite probe model).</td><td><code>sealed_handoff_safe</code></td><td>crdt-lean</td></tr>
+        <tr><td>Applicability bridge</td><td>The abstract no-double-spend theorem transfers to SealV2's real nonce model, honestly scoped to within the approval's TTL, per concurrent replica.</td><td><code>sealv2_frontier_card_le_one</code></td><td>seal-host</td></tr>
+      </tbody>
+    </table>
+    <p>Honest boundaries, stated not blurred: necessity is proven for the abstract system, sufficiency in the finite probe model; the transferred claim is single-use <em>within the approval's TTL window</em>, not for all time. Overview: the <a href="https://github.com/velvetmonkey/seal/blob/main/docs/AUTHORIZATION-MESH.md">authorization-mesh one-pager</a>.</p>
+  </section>
+
   <h2>Lead repositories</h2>
   <ul class="lead">
     <li><span class="bucket">Research novelty</span><br>

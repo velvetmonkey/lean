@@ -78,47 +78,11 @@
     &nbsp;<span style="color:var(--dim)">interactive showcase →</span></a>
 
   <section class="context" aria-label="Load-bearing bricks">
-    <p><b>Three load-bearing bricks</b> anchor the corpus, one per field where a proven boundary is itself the product:</p>
+    <p><b>Two load-bearing bricks</b> anchor the corpus, each a field where a proven boundary is itself the product:</p>
     <ul>
       <li><b>AI expressivity</b> &mdash; <a href="https://github.com/velvetmonkey/attention-lean">attention-lean</a>: the <code>Fixable</code> abstraction gives exact per-function head counts for single-layer hard attention (parity on n bits needs n heads; strict majority on 5 bits needs exactly 4). A machine-checked lower bound on what the architecture can compute.</li>
-      <li><b>Agent security</b> &mdash; <a href="https://github.com/velvetmonkey/mcp-seal">mcp-seal</a> / <a href="https://github.com/velvetmonkey/seal-host">seal-host</a> / <a href="https://github.com/velvetmonkey/temporal-logic-lean">temporal-logic-lean</a>: non-bypass and default-deny mediation proved as theorems, single-request non-interference (<code>observe_noninterference</code>: the receipt is not a covert channel), and a tamper-evident record chain.</li>
       <li><b>Distributed coordination</b> &mdash; <a href="https://github.com/velvetmonkey/crdt-lean">crdt-lean</a>: strong eventual consistency and conditional liveness, with fairness and quiescence stated, not blurred.</li>
     </ul>
-  </section>
-
-  <section class="context" aria-label="Seal authorization mesh">
-    <style>
-      .brick-table{width:100%;border-collapse:collapse;margin:0.6rem 0;font-size:0.92em}
-      .brick-table th,.brick-table td{border:1px solid var(--dim,#444);padding:0.4rem 0.6rem;text-align:left;vertical-align:top}
-      .brick-table th{font-weight:600}
-      .brick-table code{white-space:nowrap}
-    </style>
-    <p><b>The agent-security brick, in detail: the seal authorization mesh.</b> A machine-checked authorization boundary for AI agents, plus a proof that a fleet of these gates keeps a one-shot approval single-use across a network partition. Every result is kernel-checked to the axiom footprint <code>{propext, Classical.choice, Quot.sound}</code>, no <code>sorry</code>, no <code>native_decide</code>.</p>
-    <table class="brick-table">
-      <thead><tr><th>Brick</th><th>What it proves</th><th>Theorem</th><th>Repo</th></tr></thead>
-      <tbody>
-        <tr><td>Non-bypass / default-deny</td><td>No guarded tool call reaches execution without a matching live approval; absent one, the answer is no.</td><td><code>non_bypass</code>, <code>default_deny</code></td><td>mcp-seal</td></tr>
-        <tr><td>Receipt non-interference (single request)</td><td>The audit record reveals nothing about protected policy or other tenants beyond the one authorized bit.</td><td><code>observe_noninterference</code></td><td>seal-host</td></tr>
-        <tr><td>Receipt non-interference (cross-session)</td><td>The guarantee holds across a whole request trace; the record is not a covert channel over time.</td><td><code>stateful_noninterference_trace</code></td><td>seal-host</td></tr>
-        <tr><td>Tamper-evident record chain</td><td>The audit chain cannot be altered undetectably, under an injective hash step.</td><td><code>Host.Record.tamper_evident</code></td><td>seal-host</td></tr>
-        <tr><td>Authority-frontier necessity</td><td>Over freely-replicable state, staying single-use forces at most one live consumer at any consistent cut; drop coordination and a double-spend is witnessed.</td><td><code>authority_frontier_card_le_one</code></td><td>crdt-lean</td></tr>
-        <tr><td>Sealed-handoff sufficiency</td><td>Sealing a sender's own consume before the next node is enabled keeps the fleet safe (proven in the finite probe model).</td><td><code>sealed_handoff_safe</code></td><td>crdt-lean</td></tr>
-        <tr><td>Applicability bridge</td><td>The abstract no-double-spend theorem transfers to SealV2's real nonce model, honestly scoped to within the approval's TTL, per concurrent replica.</td><td><code>sealv2_frontier_card_le_one</code></td><td>seal-host</td></tr>
-      </tbody>
-    </table>
-    <p>Honest boundaries, stated not blurred: necessity is proven for the abstract system, sufficiency in the finite probe model; the transferred claim is single-use <em>within the approval's TTL window</em>, not for all time. Overview: the <a href="https://github.com/velvetmonkey/seal/blob/main/docs/AUTHORIZATION-MESH.md">authorization-mesh one-pager</a>.</p>
-  </section>
-
-  <section class="context" aria-label="Combination bricks">
-    <p><b>Combination bricks.</b> Two results that cross field lines: one bounds what a heuristic guard can do, one is the coordination-free clock under a fleet of gates. Same axiom footprint <code>{propext, Classical.choice, Quot.sound}</code>, no <code>sorry</code>, no <code>native_decide</code>.</p>
-    <table class="brick-table">
-      <thead><tr><th>Brick</th><th>What it proves</th><th>Theorem</th><th>Repo</th></tr></thead>
-      <tbody>
-        <tr><td>Bounded-monitor impossibility</td><td>A finite-memory monitor below a state threshold provably cannot enforce an unbounded-window safety property, and a concrete bypassing trace is exhibited &mdash; a heuristic guard is defeatable by construction, which is why exact-match mediation is the boundary that holds.</td><td><code>bounded_monitor_memory_lower_bound</code>, <code>obs_monitor_misses_assembly</code></td><td>temporal-logic-lean</td></tr>
-        <tr><td>Coordinator-free fleet clock</td><td>A discrete (Euler) Kuramoto update keeps a fleet's phase skew bounded below <code>&pi;</code> for all time (all <code>N</code>), and for <code>N &ge; 3</code> <strong>contracts it to zero geometrically</strong> &mdash; the fleet reaches a common phase with no coordinator. The &ldquo;when&rdquo; half that pairs with CRDT state agreement (the &ldquo;what&rdquo;). Proof route: rewrite the nonlinear step as stochastic averaging and apply the Dobrushin ergodicity coefficient.</td><td><code>discreteFlow_bounded_skew</code>, <code>discreteFlow_tendsto_zero</code></td><td>kuramoto-lean</td></tr>
-      </tbody>
-    </table>
-    <p>Honest boundaries: the monitor result is a model-level lower bound on finite observers; the fleet clock proves <em>bounded skew</em> for all <code>N</code> and <em>geometric convergence to zero skew</em> for <code>N &ge; 3</code> with <code>0 &lt; h</code>. At the two-node step boundary (<code>N = 2</code>) the contraction factor is exactly zero, so that case only confines &mdash; a named edge, not papered over.</p>
   </section>
 
   <h2>Lead repositories</h2>
@@ -126,7 +90,7 @@
     <li><span class="bucket">Research novelty</span><br>
       <a class="name" href="https://github.com/velvetmonkey/attention-lean">attention-lean</a> — <span class="desc">Exact finite-model theory of single-layer hard attention (Mathlib): head output = <code>Fixable</code> = decision list, giving exact per-function head counts. Parity on n bits needs n heads; strict majority on 5 bits needs exactly 4. First witness-vs-certificate gap, k(maj5)=4, machine-checked to a three-axiom footprint, zero sorry. <a href="https://zenodo.org/records/21188381">Paper (Zenodo, DOI 10.5281/zenodo.21188381)</a>.</span></li>
     <li><span class="bucket">Assurance engineering · proof to system</span><br>
-      <a class="name" href="https://github.com/velvetmonkey/temporal-logic-lean">temporal-logic-lean</a> — <span class="desc">LTL + monitor soundness over the safety fragment; the verified Safety Seal core. Enforcement (<code>gateTrace_sealSafe</code>) proved as a theorem for traces generated by the verified gate, not axiomatised. The proof spine under the public <a href="https://github.com/velvetmonkey/mcp-seal">mcp-seal</a> boundary. Zero sorry, axiom-clean.</span></li>
+      <a class="name" href="https://github.com/velvetmonkey/temporal-logic-lean">temporal-logic-lean</a> — <span class="desc">LTL + monitor soundness over the safety fragment. Enforcement proved as a theorem for traces generated by the verified monitor, not axiomatised. Zero sorry, axiom-clean.</span></li>
     <li><span class="bucket">System-tied formalization</span><br>
       <a class="name" href="https://github.com/velvetmonkey/kuramoto-lean">kuramoto-lean</a> — <span class="desc">Finite-N Kuramoto synchronisation: 34 proved statements, zero sorry. Continuous convergence to synchrony for any symmetric coupling with a uniform positive off-diagonal floor (all-to-all as a corollary), from open-semicircle initial conditions; plus a discrete fleet-clock line proving coordinator-free convergence to zero phase skew. The dynamics spine under <a href="https://velvetmonkey.github.io/flywheel-universe/">flywheel-universe</a>.</span></li>
     <li><span class="bucket">Distributed-systems proof library</span><br>
